@@ -1,0 +1,90 @@
+<html>
+<head>
+<meta content="en-us" http-equiv="Content-Language">
+<meta content="homepage, thomas, schilb, thomasschilb, ts, code, design, music" name="keywords">
+<meta content="IT &amp; Computing - Solutions On Demand" name="description">
+<LINK REL="ICON" TYPE="IMAGE/X-ICON" HREF="/favicon.ico">
+<link rel="icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
+<link rel="shortcut icon" href="/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<title>Thomas Schilb</title>
+<base target="_self">
+<style type="text/css">
+
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
+.share-tech-mono-regular {
+  font-family: "Share Tech Mono", monospace;
+  font-weight: 400;
+  font-style: normal;
+}
+
+font {
+  font-family: "Share Tech Mono", monospace;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 23px;
+}
+
+a {
+	color: #FFFFFF;
+	text-decoration: none;
+  	transition: 0.3s;
+}
+
+a:visited {
+	color: #FFFFFF;
+}
+
+a:active {
+	color: #FFFFFF;
+}
+
+a:hover {
+	color: #31C8F9;
+  	opacity: 1;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #000;
+  float: right;
+  position: sticky;
+  top: 0;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 0px 15px;
+  text-decoration: none;
+}
+
+li a:hover:not(.active) {
+  background-color: #000;
+  color: #31C8F9;
+}
+
+.active {
+  background-color: #31C8F9;
+}
+</style>
+<title>Thomas Schilb</title>
+<ul>
+  <li><a href="#home">Home</a></li>
+  <li><a href="#work">Work</a></li>
+  <li><a href="#about">About</a></li>
+  <li><a href="#contact">Contact</a></li>
+  <li><a href="#terms">§</a></li>
+</ul>
+</font>

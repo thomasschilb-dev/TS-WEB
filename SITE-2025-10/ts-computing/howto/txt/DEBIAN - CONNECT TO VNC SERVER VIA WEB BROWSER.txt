@@ -1,0 +1,54 @@
+DEBIAN - CONNECT TO VNC SERVER VIA WEB BROWSER
+
+Install noVNC which is a VNC Client tool to connect to VNC server via Web Browser.
+
+[1]	Install some required packages.
+$ apt -y install novnc python-websockify
+
+[2]	Start VNC Server with a user, refer to here.
+This example is based on that [debian] user runs VNC server with [5901] port.
+
+[3]	Login as a user who runs VNC and create certificates, and then Start Websockify to proxy [localhost:5901] on port [6080].
+
+$ openssl req -x509 -nodes -newkey rsa:2048 -keyout novnc.pem -out novnc.pem -days 365
+
+Generating a RSA private key
+............+++++
+......+++++
+writing new private key to 'novnc.pem'
+-----
+You are about to be asked to enter information that will be incorporated
+into your certificate request.
+What you are about to enter is what is called a Distinguished Name or a DN.
+There are quite a few fields but you can leave some blank
+For some fields there will be a default value,
+If you enter '.', the field will be left blank.
+-----
+Country Name (2 letter code) [AU]:DE   # country
+
+State or Province Name (full name) [Some-State]:Hiroshima   # state
+
+Locality Name (eg, city) []:Hiroshima  # city
+
+Organization Name (eg, company) [Internet Widgits Pty Ltd]:GTS   # company
+
+Organizational Unit Name (eg, section) []:Server World   # department
+
+Common Name (e.g. server FQDN or YOUR name) []:dlp.srv.world   # server's FQDN
+
+Email Address []:root@srv.world   # admin email
+
+$ websockify -D --web=/usr/share/novnc/ --cert=/home/debian/novnc.pem 6080 localhost:5901
+
+WebSocket server settings:
+  - Listen on :6080
+  - Flash security policy server
+  - Web server. Web root: /usr/share/novnc
+  - SSL/TLS support
+  - Backgrounding (daemon)
+  
+[4]	Access to the [https://(server's hostname or IP address):6080/vnc.html] from a client computer with web browser, then noVNC form is displayed like follows, Click [Connect] to proceed.
+
+[5]	Password is required. Input VNC password of the user.
+
+[6]	Just connected. It's possible to operate Debian on Web browser.

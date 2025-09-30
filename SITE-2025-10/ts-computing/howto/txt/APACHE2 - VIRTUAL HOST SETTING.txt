@@ -1,0 +1,48 @@
+APACHE2 - VIRTUAL HOST SETTING
+ 	
+Configure Virtual Hostings to use maltiple domain names.
+The example below is set on the environment which the domain name is [srv.world], virtual domain name is [virtual.host (root directory [/home/ubuntu/public_html])].
+It's necessarry to set Userdir settings for this example, too.
+
+
+[1]	Configure Apache2
+
+$ vi /etc/apache2/sites-available/virtual.host.conf
+
+# create new for [virtual.host]
+
+<VirtualHost *:80>
+    ServerName virtual.host
+	ServerAlias www.virtual.host
+    ServerAdmin webmaster@virtual.host
+    DocumentRoot /home/debian/public_html
+    ErrorLog /var/log/apache2/virtual.host-error.log
+    CustomLog /var/log/apache2/virtual.host-access.log combined
+    LogLevel warn
+</VirtualHost>
+
+$ a2ensite virtual.host
+
+Enabling site virtual.host.
+
+To activate the new configuration, you need to run:
+
+$ systemctl reload apache2
+
+$ systemctl restart apache2
+
+
+[2]	Create a test page and access to it from a client computer with a web browser.
+
+It's OK if following page is shown.
+
+$ mkdir ~/public_html
+
+$ vi ~/public_html/index.html
+<html>
+<body>
+<div style="width: 100%; font-size: 40px; font-weight: bold; text-align: center;">
+Virtual Host Test Page
+</div>
+</body>
+</html>

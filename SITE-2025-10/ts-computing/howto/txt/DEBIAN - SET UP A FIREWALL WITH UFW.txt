@@ -1,0 +1,153 @@
+DEBIAN - SET UP A FIREWALL WITH UFW
+
+This tutorial will show you how to set up a firewall with UFW on Debian 10.
+
+
+Step 1 - Installing UFW
+
+$ sudo apt install ufw
+
+
+Step 2 — Using IPv6 with UFW (Optional)
+
+$ sudo nano /etc/default/ufw
+
+Locate IPV6 in the file and ensure the value is yes:
+
+/etc/default/ufw excerpt
+
+IPV6=yes
+
+Save and close the file. If you’re using nano, press CTRL+X, then Y, then ENTER to save and exit the file.
+
+Now when UFW is enabled, it will be configured to write both IPv4 and IPv6 firewall rules. Before enabling UFW, however, you will want to ensure that your firewall is configured to allow you to connect via SSH. Start with setting the default policies.
+
+
+Step 3 — Setting Up Default Policies
+
+If you’re just getting started with your firewall, the first rules to define are your default policies. These rules handle traffic that does not explicitly match any other rules. By default, UFW is set to deny all incoming connections and allow all outgoing connections. This means anyone trying to reach your server would not be able to connect, while any application within the server would be able to reach the outside world.
+
+Set your UFW rules back to the defaults so you can be sure that you’ll be able to follow along with this tutorial. To set the defaults used by UFW, use these commands:
+
+$ sudo ufw default deny incoming
+$ sudo ufw default allow outgoing
+
+These commands set the defaults to deny incoming and allow outgoing connections.
+
+
+Step 4 — Allowing SSH Connections
+
+You can’t enable your UFW firewall yet, because it would deny all incoming connections including your attempts to access your server. This means that you will need to create rules that explicitly allow legitimate incoming connections — SSH or HTTP connections, for example — if you want your server to respond to those types of requests. If you’re using a cloud server, you will probably want to allow incoming SSH connections so you can connect to and manage your server.
+
+To configure your server to allow incoming SSH connections, use this command:
+
+$ sudo ufw allow ssh
+
+This will create firewall rules that will allow all connections on port 22, which is the port that the SSH daemon listens on by default. UFW knows what port is tied to allow ssh because it’s listed as a service in the /etc/services file.
+
+However, you can actually write the equivalent rule by specifying the port instead of the service name. For example, this command produces the same result as the one above:
+
+$ sudo ufw allow 22
+
+If you configured your SSH daemon to use a different port, you will have to specify the appropriate port. For example, if your SSH server is listening on port 2222, you can use this same command but replace 22 with 2222.
+
+Now that your firewall is configured to allow incoming SSH connections, you can enable it.
+
+
+Step 5 — Enabling UFW
+
+To enable UFW, use this command:
+
+$ sudo ufw enable
+
+You will receive a warning that says the command may disrupt existing SSH connections. You already set up a firewall rule that allows SSH connections, so it should be fine to continue. Respond to the prompt with y and hit ENTER.
+
+The firewall is now active. To see the rules that you have set, run this command:
+
+$ sudo ufw status verbose
+
+
+Step 6 — Allowing Other Connections
+
+At this point, you should allow all of the other connections that your server needs to function properly. The connections that you should allow depend on your specific needs. You already know how to write rules that allow connections based on a service name or port; you did this for SSH on port 22.
+
+You can do this for HTTP on port 80, which is what unencrypted web servers use. To allow this type of traffic, you would type:
+
+$ sudo ufw allow http
+
+You can also do this for HTTPS on port 443, which is what encrypted web servers use. To allow this type of traffic, you would type:
+
+$ sudo ufw allow https
+
+In both scenarios, specifying the ports would also work, with HTTP being 80 and HTTPS being 443.
+For example if you run Apache2 Service on your VPS.
+
+Connections to a Specific Network Interface
+
+If you want to create a firewall rule that only applies to a specific network interface, you can do so by specifying allow in on, followed by the name of the network interface.
+
+It will be helpful to look up your network interfaces before continuing. To do so, use this command:
+
+$ ip addr
+
+If your server has a public network interface named inet6, for example, you could allow HTTP traffic to it with this command:
+
+$ sudo ufw allow in on inet6 to any port 443
+
+MySQL database server (port 3306) to listen for connections on the private network interface eth1, you could use this command:
+
+$ sudo ufw allow in on inet to any port 3306
+
+
+Step 7 — Denying Connections
+
+For example, to deny HTTP connections, you could use this command:
+
+$ sudo ufw deny http
+
+Or if you want to deny all connections from 203.0.113.4 you could use this command:
+
+$ sudo ufw deny from 203.0.113.4
+
+
+Step 8 — Deleting Rules
+
+Knowing how to delete firewall rules is just as important as knowing how to create them. There are two ways to specify which rules to delete: by the rule number or by the rule itself. This is similar to how the rules were specified when they were created.
+
+By Rule Number
+
+If you’re using the rule number to delete firewall rules, the first thing you’ll want to do is get a list of your firewall rules. The UFW status command has the numbered option, which displays numbers next to each rule:
+
+$ sudo ufw status numbered
+
+E.g. If you decide that you want to delete rule 2, which allows HTTP connections on port 80, you can specify this in the following UFW delete command:
+
+$ sudo ufw delete 2
+
+By Actual Rule
+
+The alternative to rule numbers is to specify the actual rule to delete. For example, if you want to remove the allow http rule, you could write it like this:
+
+sudo ufw delete allow http
+You can also specify the rule with allow 80 instead of the service name:
+
+sudo ufw delete allow 80
+This method will delete both IPv4 and IPv6 rules, if they exist.
+
+
+Step 9 — Checking UFW Status and Rules
+
+At any time, you can check the status of UFW with this command:
+
+$ sudo ufw status verbose
+
+
+Step 10 — Disabling or Resetting UFW (optional)
+
+If you decide you don’t want to use UFW, you can disable it with this command:
+
+$ sudo ufw disable
+
+If you already have UFW rules configured, but you decide that you want to start over, you can use the reset command:
+
+$ sudo ufw reset

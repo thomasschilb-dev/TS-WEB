@@ -1,0 +1,13 @@
+User-agent: Googlebot
+Allow: /
+Disallow: ips/*.IP$
+
+User-agent: Bingbot
+Allow: /
+Disallow: ips/*.IP$
+
+User-agent: *
+Allow: /
+Disallow: ips/*.IP$
+
+Sitemap: http://dubpulse.info/sitemap.xml

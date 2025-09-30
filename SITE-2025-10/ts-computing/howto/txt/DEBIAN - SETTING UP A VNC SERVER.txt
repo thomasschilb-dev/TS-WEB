@@ -1,0 +1,132 @@
+DEBIAN - SETTING UP A VNC SERVER
+
+Setting up a VNC server on Debian 12 allows you to remotely access and control your Debian system’s graphical desktop environment from another computer. This can be incredibly useful for managing your server, running graphical applications, or providing remote support. In this guide, we’ll walk you through the step-by-step process of installing and configuring a VNC server, ensuring you have a secure and efficient remote desktop setup. From updating your system and installing a desktop environment to configuring the VNC server and enabling it to start at boot, this comprehensive guide covers everything you need to know to get your VNC server up and running on Debian 12.
+
+
+To start, make sure you’ve created a VPSie account if you haven’t already. Next, proceed by deploying an Debian 12 server configured to meet your specific needs.
+
+Once the server is deployed, SSH into the command line interface. Before installing any packages, it’s essential to update your system’s package list to ensure you have access to the latest versions. Open a terminal and run the following command:
+
+$ sudo apt-get update -y
+
+Install the Desktop Environment
+If you don’t have a graphical desktop environment (DE), you need to install one. XFCE is a lightweight option.
+
+
+Install XFCE and additional goodies:
+
+$ sudo apt install xfce4 xfce4-goodies -y
+ 
+
+‘xfce4‘ installs the XFCE desktop environment.
+‘xfce4-goodies‘ includes additional applications and utilities for XFCE.
+ 
+Install the VNC Server
+TightVNC is a popular VNC server that provides a remote desktop view.
+
+
+Install TightVNC server:
+
+$ sudo apt install tightvncserver -y
+ 
+
+Configure the VNC Server
+
+Initial configuration involves setting a password and creating a session.
+
+Start the VNC server to set the initial configuration:
+
+$ vncserver
+
+You will be prompted to enter and confirm a password for VNC access. This password will be used to connect to the VNC server.
+Optionally, you can set a view-only password, which allows users to view the desktop but not interact with it.
+ 
+
+Stop the VNC server, as we will configure it further:
+
+$ vncserver -kill :1
+ 
+The :1 represents the display number. The first VNC display is :1, the second would be :2, and so on.
+
+
+Configure VNC to Use XFCE
+
+We need to tell VNC to start the XFCE desktop environment.
+
+Open the xstartup file in a text editor:
+
+$ nano ~/.vnc/xstartup
+
+Modify the file to include the following lines:
+
+#!/bin/bash
+xrdb $HOME/.Xresources
+startxfce4 &
+
+#!/bin/bash specifies that the file is a script to be executed by the bash shell.
+
+xrdb $HOME/.Xresources - loads X resources.
+startxfce4 & - starts the XFCE desktop environment.
+
+Make the script executable:
+
+$ chmod +x ~/.vnc/xstartup
+Start the VNC server with your configured settings:
+
+$ vncserver :1
+
+This command starts the VNC server on display :1.
+
+Configure the VNC Server to Start at Boot (Optional)
+To make the VNC server start automatically at boot, we can create a systemd service.
+
+
+Create a new systemd service file:
+
+$ sudo nano /etc/systemd/system/vncserver@.service
+ 
+Add the following content, replacing <username> with your actual username:
+
+[Unit]
+Description=Start TightVNC server at startup
+After=syslog.target network.target
+
+[Service]
+Type=forking
+User=<username>
+Group=<username>
+WorkingDirectory=/home/<username>
+
+PIDFile=/home/<username>/.vnc/%H:%i.pid
+ExecStartPre=/usr/bin/vncserver -kill :%i > /dev/null 2>&1 || true
+ExecStart=/usr/bin/vncserver -depth 24 -geometry 1280x800 :%i
+ExecStop=/usr/bin/vncserver -kill :%i
+
+[Install]
+WantedBy=multi-user.target
+ExecStartPre ensures any existing VNC sessions are terminated before starting a new one.
+ExecStart specifies the command to start the VNC server with a resolution of 1280×800 and 24-bit color depth.
+ExecStop specifies the command to stop the VNC server.
+
+
+Reload the systemd daemon to apply the changes:
+
+$ sudo systemctl daemon-reload
+
+
+Enable the VNC service to start on boot:
+
+$ sudo systemctl enable vncserver@1.service
+
+
+Connect to the VNC Server
+
+Download and install a VNC viewer application on your client machine. Some popular options include RealVNC Viewer, TightVNC Viewer, and TigerVNC Viewer.
+Open the VNC viewer application.
+
+Connect to your VNC server using the server’s IP address and the display number.
+For example: 192.168.1.100:1
+
+Enter the VNC password you set earlier when prompted.
+
+You should now see the XFCE desktop environment of your Debian 12 system on your client machine.

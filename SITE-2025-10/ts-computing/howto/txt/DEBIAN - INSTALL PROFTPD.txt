@@ -1,0 +1,24 @@
+LINUX - INSTALL PROFTPD
+
+Install ProFTPD to configure FTP server to transfer files.
+
+[1]	Install ProFTPD.
+
+$ apt -y install proftpd
+$ nano /etc/proftpd/proftpd.conf
+
+# line 11: turn off if not need IPv6
+UseIPv6 off
+
+# line 15: change to your hostname
+ServerName "www.srv.world"
+
+# line 36: uncomment ( specify root directory for chroot )
+DefaultRoot ~
+
+$ vi /etc/ftpusers
+
+# add users you prohibit FTP connection
+test
+
+$ systemctl restart proftpd

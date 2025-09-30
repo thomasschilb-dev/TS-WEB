@@ -1,0 +1,9 @@
+User-agent: Googlebot
+Allow: /
+Disallow: IPS/*.IP$
+Disallow: IPS/*.IP$
+
+User-agent: *
+Allow: /
+
+Sitemap: http://ts-index.de/sitemap.xml

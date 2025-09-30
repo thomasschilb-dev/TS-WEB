@@ -1,0 +1,76 @@
+DEBIAN - INSTALL A LAMP STACK
+
+One of the first tasks when setting up a Linux web server is the installation of a LAMP stack. The acronym LAMP stands for Linux, Apache, MySQL and PHP.
+
+
+Reconfiguring the firewall
+
+$ sudo ufw status
+$ sudo ufw allow in "WWW Full"
+$ sudo ufw reload
+
+
+Installing Apache
+
+The first step to install the LAMP stack on our Debian 10 server, starts with the installation of the Apache HTTP server. Connect to your server via SSH and run this command:
+
+$ sudo apt install apache2 -y
+$ sudo systemctl status apache2
+
+To enable the mod_rewrite Apache module, run the following command:
+
+$ sudo a2enmod rewrite
+$ sudo systemctl restart apache2
+
+
+Installing PHP
+
+With the Apache HTTP server up and running, we can continue with the next component in the LAMP stack. The installation of PHP is straightforward. Simply run the following command to install PHP together with commonly use add-on modules:
+
+$ sudo apt install php php-pear php-mysql php-curl php-mbstring php-imagick php-zip php-gd -y
+$ sudo systemctl restart apache2
+
+
+Installing MariaDB
+
+MariaDB is the last LAMP component to install. Proceed with the MariaDB installation by running the command:
+
+$ sudo apt install mariadb-server -y
+
+To further secure the MariaDB installation, execute the script:
+
+$ sudo mysql_secure_installation
+
+The script asks you several questions:
+
+“Enter current password for root (enter for none)”. Since we haven’t configured a password, simply press Enter.
+
+“Set root password? [Y/n]”. Debian uses the so called unix_socket instead of password authentication method. For this reason we do not need to set a root password, so press n here. This essentially means that only Debian users with sudo privileges can log into MySQL. They can conveniently do so without having to specify a password. This is secure, because they still need to enter their password to obtain their super user privileges.
+
+“Remove anonymous users? [Y/n]”. Allowing anonymous users access to the database system poses a security risk. Therefore, press Y here.
+
+“Disallow root login remotely? [Y/n]”. Theoretically this one doesn’t really matter, because thanks to the unix_socket authentication method, the MySQL root user cannot login with the usual username and password combination. In any case, I do recommend pressing Y here to further lock down the MySQL access.
+
+“Remove test database and access to it? [Y/n]”. We have no use for the test database, so better to remove it by pressing Y here.
+
+“Reload privilege tables now? [Y/n]”. The security script made a few configuration changes, so proceed by pressing Y here.
+
+To verify the successful installation of MariaDB we can attempt to log in to it. From the SSH terminal, all users with sudo privileges can log in as the MySQL root user by running this command:
+
+$ sudo mysql -u root
+
+To exit, type exit.
+
+
+MySQL database and user creation
+
+Database name: wordpress
+Database user: wp-user
+Database password: Passw0rd!
+$ sudo mysql -u root
+
+$ CREATE DATABASE wordpress CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+
+$ GRANT ALL ON wordpress.* TO 'wp-user' IDENTIFIED BY 'Passw0rd!';
+
+$ exit
