@@ -1,0 +1,18 @@
+LINUX - REMOVING DIRECTORIES
+
+
+The short answer
+
+To remove an entire directory or folder, including the files and subdirectories it contains, you can use the rm command with the -r flag (short for recursive):
+
+$ rm -r directory
+
+
+Forcing the removal of directories with rm -f
+
+$ rm -rf directory
+
+
+Note that in case the directory belongs to another user, you'll have to use the sudo command to gain elevated privileges in order to remove it.
+
+$ sudo rm -rf directory

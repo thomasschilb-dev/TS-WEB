@@ -1,0 +1,9 @@
+Original: Thomas Schilb - The New World Formula [UNSOLVED]
+Version: 0.0.0.2
+
+E = m*c[n]
+E = m times c to the power of n
+
+ToDo:
+
+error: becomes unstable and tears itself apart

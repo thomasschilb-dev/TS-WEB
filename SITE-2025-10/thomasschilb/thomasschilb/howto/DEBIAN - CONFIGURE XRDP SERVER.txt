@@ -1,0 +1,20 @@
+DEBIAN - CONFIGURE XRDP SERVER
+ 	
+Install Xrdp Server to connect to Debian from the Windows Remote Desktop function.
+
+[1]	Install and start Xrdp Server.
+
+$ apt -y install xrdp
+$ systemctl start xrdp
+$ systemctl enable xrdp
+
+[2]	Connect from Windows clients. For example on Windows 10.
+Start [Remote Desktop connection] on the Start-Menu.
+
+[3]	Input the hostname or IP address you'd like to connect and push the [Connect] button.
+
+[4]	Answer with [Yes].
+
+[5]	Authenticate with a user and password that exists on Debian local System.
+
+[6]	Just connected.

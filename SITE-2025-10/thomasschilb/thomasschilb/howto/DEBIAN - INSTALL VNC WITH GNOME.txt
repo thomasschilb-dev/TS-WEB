@@ -1,0 +1,57 @@
+DEBIAN - INSTALL VNC WITH GNOME
+
+VNC is a remote desktop sharing system that will allow you to connect your home PC to a GUI (graphical interface) hosted on your VPS, for easy remote management. This guide will walk you through the steps required to setup and access a VNC server hosted on a Debian VPS.
+
+Before beginning, ensure you are logged in to your VPS as the root user, and run the following:
+
+# apt-get update
+
+# apt-get upgrade
+
+1. Install GNOME:
+
+#apt-get install gnome-desktop-environment
+
+2. Install required fonts:
+
+# apt-get install xfonts-100dpi
+
+# apt-get install xfonts-100dpi-transcoded
+
+# apt-get install xfonts-75dpi
+
+# apt-get install xfonts-75dpi-transcoded
+
+# apt-get install xfonts-base
+
+3. Install TightVNCServer:
+
+# apt-get install tightvncserver
+
+4. Start TightVNCServer for the first time, it will copy config files and prompt you for a password:
+
+# tightvncserver :1
+
+5. Stop the VNC server, so we can continue to configure it:
+
+# tightvncserver -kill :1
+
+6. Edit the xstartup file:
+
+# vi ~/.vnc/xstartup
+
+Press "A" to enter edit mode. Replace the contents of the file with the following (or edit to match):
+
+#!/bin/shxrdb $HOME/.Xresources
+xsetroot -solid grey
+x-terminal-emulator -geometry 80x24+10+10 -ls -title "$VNCDESKTOP Desktop" &
+# x-window-manager &
+gnome-session &
+
+Press ESC, type :wq, then press enter to save and close the file.
+
+7. Start the VNC server with your desired resolution:
+
+# tightvncserver -geometry 1024x768 :1
+
+You can now access your server's remote GNOME desktop with a desktop VNC client. Enter your server's main IP address, Port 1 (or 5901, alternately), and the password you set earlier to connect to the desktop.

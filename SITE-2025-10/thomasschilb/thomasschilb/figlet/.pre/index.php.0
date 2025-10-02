@@ -1,0 +1,17 @@
+<form action="index.php" method="GET">
+Text: <input type="text" name="name"><br>
+<input type="submit">
+</form><br><br>
+<hr>
+<?php
+$folder = '/var/www/html/thomasschilb/figlet/fonts';
+$text="PRESCENE";
+
+$files = array_diff(scandir($folder), array('..', '.'));
+foreach($files as $file) {
+echo 'Download: <a href="fonts/'.$file.'">'.$file.'</a>', "\n";
+$asciip = shell_exec("figlet ".$text." -d ".$folder." -f ".$file." | sed 's/./& /g;s/ / /g'");
+echo '<pre>'.$asciip.'</pre>';
+}
+
+?>

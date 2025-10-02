@@ -1,0 +1,68 @@
+Original: Thomas Schilb - FracPi[n]is.txt
+Based On: Bihar STET TGT (Maths), Google KI
+Held On: 19.08.2025
+Version: Unofficial Paper 1.0.2
+
+Pi1 [Machine, I/O]
+
+The expression frac(pi/1) represents a fraction, specifically pi divided by one.
+Since any number divided by one is itself, this expression simplifies to just pi (π).
+Pi (π) is a mathematical constant, approximately equal to 3.14159, and is known
+for being irrational. Therefore, the answer is a real number, irrational number,
+and an algebraic number. 
+
+Pi2 [She, Sie]
+
+The number π/2 is an irrational number. It's the result of dividing the mathematical
+constant π (pi) by 2. Irrational numbers cannot be expressed as a simple fraction,
+and their decimal expansions neither terminate nor repeat. 04.01.2024
+
+Pi3 [He, Er]
+
+The expression frac(pi/3) represents a fraction, specifically a fraction where the
+numerator is π (pi) and the denominator is 3. Since π is an irrational number,
+this fraction represents an irrational number as well. Any number that can be
+expressed in the form of a fraction (where both numerator and denominator are
+integers and the denominator is not zero) is considered a rational number.
+However, because pi is irrational, the fraction pi/3 cannot be simplified
+to a simple fraction of integers, making it an irrational number.
+
+Pi4 [Time, Zeit]
+
+Fractions represent parts of a whole and are fundamentally rational numbers.
+They can be categorized into several types based on their structure and
+relationship between the numerator and denominator: 
+
+1. Proper Fractions:
+In proper fractions, the numerator (top number) is smaller than the denominator (bottom number).
+Examples: 1/2, 3/4, 7/10 
+
+2. Improper Fractions:
+In improper fractions, the numerator is greater than or equal to the denominator.
+Examples: 5/2, 11/8, 6/6 
+
+3. Mixed Fractions:
+A mixed fraction combines a whole number and a proper fraction.
+Examples: 2 1/2, 3 1/4, 1 5/8 
+
+4. Decimal Fractions:
+These are fractions where the denominator is a power of 10 (e.g., 10, 100, 1000) and are expressed as decimals.
+Examples: 0.5 (which is equivalent to 1/2), 0.25 (which is equivalent to 1/4) 
+
+5. Unit Fractions:
+A unit fraction has a numerator of 1.
+Examples: 1/3, 1/5, 1/12 
+
+6. Like Fractions:
+These are fractions that have the same denominator.
+Examples: 2/7, 5/7, 6/7 
+
+7. Unlike Fractions:
+These are fractions that have different denominators.
+Examples: 2/5, 3/8, 7/11
+
+-------------------------------------------------------------------------------
+Don't you know how to escape time?
+Try this: https://www.youtube.com/watch?v=Rv0c7R8brjE
+
+Or Use 8-Dimensional instead of 4-Dimensional [4/8]

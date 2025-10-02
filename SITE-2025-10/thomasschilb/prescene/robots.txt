@@ -1,0 +1,16 @@
+User-agent: Googlebot
+Allow: /
+Disallow: IPS/*.IP$
+
+User-agent: Googlebot
+Allow: /
+Disallow: ips/*.IP$
+
+User-agent: Bingbot
+Allow: /
+Disallow: ips/*.IP$
+
+User-agent: *
+Disallow:
+
+Sitemap: https://prescene.groups.id/sitemap.xml
