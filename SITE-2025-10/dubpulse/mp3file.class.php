@@ -13,8 +13,7 @@ class MP3File
         $hours = floor($duration / 3600);
         $minutes = floor( ($duration - ($hours * 3600)) / 60);
         $seconds = $duration - ($hours * 3600) - ($minutes * 60);
-#        return sprintf("%02d:%02d:%02d", $hours, $minutes, $seconds);
-        return sprintf("%02d:%02d", $minutes, $seconds);
+        return sprintf("%02d:%02d:%02d", $hours, $minutes, $seconds);
     }
  
     //Read first mp3 frame only...  use for CBR constant bit rate MP3s
@@ -171,30 +170,3 @@ class MP3File
             return intval(((144 * $bitrate*1000)/$sample_rate) + $padding_bit);
     }
 }
-
-	$dir = "/var/www/html/dubpulse/files/tracks-mp3"; // relative directory of the files
-	
-	$files = array_diff(scandir($dir), array('.','..','index.php','index.html','.mp3','.MP3','.m4a','.M4A'));  // exclude from scandir
-
-    foreach($files as $file)
-	{
-	#$mp3file = new MP3File('.$dir.'/'.$file.');
-	#$duration1 = $mp3file->getDurationEstimate();//(faster) for CBR only
-	#$duration2 = $mp3file->getDuration();//(slower) for VBR (or CBR)
-	#echo "duration: $duration1 seconds"."\n";
-	#echo "estimate: $duration2 seconds"."\n";
-	#$mp3time = MP3File::formatTime($duration2);
-
-		$sizepath = $dir.'/'.$file;
-		
-		$mp3file = new MP3File($dir.'/'.$file);
-		$mp3duration = $mp3file->getDuration();
-		$mp3time = MP3File::formatTime($mp3duration);
-		
-		$bytes = filesize($sizepath);
-		$size = human_filesize($bytes, 1);
-		$withoutExt = preg_replace('/\.\w+$/', '', $file);
-		#echo '<a target="_blank" href="/files/tracks-mp3/'.$file.'">'.$withoutExt.'</a><font color="#808080">&nbsp;'.$mp3time.' Min. | Size: '.$size.'</font><br>';
-		echo '<a target="_blank" href="/files/tracks-mp3/'.$file.'">'.$withoutExt.'</a> <font color="#808080">['.$mp3time.']</font><br><font color="#808080">SIZE: '.$size.'</font><br><br>';
-	}
-?>

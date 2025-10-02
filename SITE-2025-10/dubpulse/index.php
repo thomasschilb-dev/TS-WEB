@@ -84,7 +84,7 @@ include('filesize.class.php');
 		<td style="width: 913px">Thomas Schilb | DJ &amp; Producer</td>
 		<td class="auto-style4">
 <font>
-		Last Update: 2025/09</font></td>
+		Last Update: 2025/10</font></td>
 	</tr>
 	<tr>
 		<td class="auto-style7" colspan="2">
@@ -110,7 +110,7 @@ include('filesize.class.php');
 		<td class="auto-style2" style="width: 216px" valign="top">tracks | 
 		</td>
 		<td valign="top">
-		TRACKS 2025/09<br><br><font><?php include('dubtechno.php'); ?>
+		TRACKS 2025/10<br><br><font><?php include('dubtechno.php'); ?>
 		<br><span class="auto-style8">ENCODED IN MP3/320K</span></font></td>
 	</tr>
 	<tr>
